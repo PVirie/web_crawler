@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 from multiprocessing.pool import ThreadPool
 import argparse
+import json
 
 # argument -i input domain -o output file
 parser = argparse.ArgumentParser(description='Web Crawler')
@@ -113,6 +114,6 @@ if __name__ == '__main__':
 
     # save to file
     with open(output_file, 'w') as f:
-        f.write(str(documents))
+        json.dump(documents, f)
 
     print('Done')
