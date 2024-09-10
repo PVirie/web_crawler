@@ -5,7 +5,7 @@ from multiprocessing.pool import ThreadPool
 import argparse
 import json
 import csv
-import uuid
+import hashlib
 
 # argument -i input domain -o output file
 parser = argparse.ArgumentParser(description='Web Crawler')
@@ -58,7 +58,8 @@ if __name__ == '__main__':
         results = pool.map(parse_item, zip(range(len(input_records)), input_records))
         
         for result in results:
-            id = str(uuid.uuid4())
+            # hash question for id
+            id = hashlib.md5(result['title'].encode()).hexdigest()
             documents[id] = result
             
         pool.close()
